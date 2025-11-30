@@ -15,6 +15,8 @@ $patents = [
         'assignee' => 'StartAgro',
         'status' => 'Em Análise',
         'date' => '2024-01-20'
+
+        
     ],
     [
         'title' => 'Sistema de monitoramento de pragas via drone',
