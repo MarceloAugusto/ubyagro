@@ -2,6 +2,7 @@
 $pageTitle = 'Explorar (Scouting)';
 require_once '../config/db.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
