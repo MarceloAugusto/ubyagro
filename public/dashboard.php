@@ -13,6 +13,7 @@ require_once '../config/db.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="dashboard-container">
@@ -136,6 +137,22 @@ require_once '../config/db.php';
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Visualizations (from Data page) -->
+                <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 30px;">
+                    <div class="card glass-panel">
+                        <h3>Padrões de Uso de Produtos</h3>
+                        <div style="height: 250px; width: 100%;">
+                            <canvas id="usageChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card glass-panel">
+                        <h3>Tendências de Mercado (Insumos)</h3>
+                        <div style="height: 250px; width: 100%;">
+                            <canvas id="priceChart"></canvas>
                         </div>
                     </div>
                 </div>

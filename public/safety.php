@@ -43,7 +43,7 @@ $documents = [
             </div>
 
             <!-- Documents List -->
-            <div class="dashboard-grid">
+            <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
                 <?php foreach($documents as $doc): ?>
                 <div class="card glass-panel" style="display: flex; flex-direction: column; justify-content: space-between;">
                     <div>

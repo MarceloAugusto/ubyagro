@@ -25,11 +25,7 @@
                 <i class="fas fa-chevron-down submenu-caret" style="margin-left:auto;"></i>
             </a>
             <ul class="submenu">
-                <li>
-                    <a href="ai-tools.php" class="<?= basename($_SERVER['PHP_SELF']) == 'ai-tools.php' ? 'active' : '' ?>">
-                        <i class="fas fa-brain"></i> Inteligência & RAG
-                    </a>
-                </li>
+
                 <li>
                     <a href="research.php" class="<?= basename($_SERVER['PHP_SELF']) == 'research.php' ? 'active' : '' ?>">
                         <i class="fas fa-book-open"></i> Pesquisa & Artigos
@@ -48,6 +44,11 @@
                 <li>
                     <a href="safety.php" class="<?= basename($_SERVER['PHP_SELF']) == 'safety.php' ? 'active' : '' ?>">
                         <i class="fas fa-shield-alt"></i> Segurança (FISPQ)
+                    </a>
+                </li>
+                                <li>
+                    <a href="ai-tools.php" class="<?= basename($_SERVER['PHP_SELF']) == 'ai-tools.php' ? 'active' : '' ?>">
+                        <i class="fas fa-brain"></i> Inteligência & RAG
                     </a>
                 </li>
             </ul>

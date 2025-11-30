@@ -1,8 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Sidebar Toggle
-    // Currently the sidebar is fixed, but for mobile we might want a toggle.
-    // Adding a simple toggle functionality if we add a button later.
-
+function setupSidebarInteractions() {
     const navLinks = document.querySelectorAll('.nav-links a');
     const settingsToggle = document.getElementById('settingsMenu');
     const settingsItem = settingsToggle ? settingsToggle.parentElement : null;
@@ -24,9 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
             settingsItem.classList.add('open');
         }
     }
+}
 
-    // (removido bloco inválido de mock visual)
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupSidebarInteractions);
+} else {
+    setupSidebarInteractions();
+}
 
 // Chart.js Implementations
 const commonOptions = {
