@@ -39,3 +39,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="js/script.js"></script>
+<div id="sidebarOverlay" class="sidebar-overlay"></div>

@@ -1,4 +1,7 @@
 <div class="top-bar">
+    <button class="menu-button" id="menuToggleBtn" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+    </button>
     <div class="user-profile">
         <div class="notifications">
             <i class="fas fa-bell" style="color: var(--text-secondary); cursor: pointer;"></i>

@@ -129,6 +129,19 @@ body {
     position: relative;
 }
 
+.menu-button {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: white;
+    box-shadow: var(--shadow-sm);
+    color: var(--text-secondary);
+}
+
 .page-title h1 {
     font-size: 1.5rem;
     margin: 0;
@@ -441,7 +454,7 @@ a {
     height: 60px;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     border-radius: 50%;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     color: white;
@@ -591,6 +604,10 @@ a {
     gap: var(--spacing-lg);
 }
 
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
 .inline-card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -698,6 +715,11 @@ a {
         transform: translateX(-100%);
         width: 0;
     }
+    .sidebar.open {
+        transform: translateX(0);
+        width: var(--sidebar-width);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
     
     .main-content {
         margin-left: 0;
@@ -721,6 +743,10 @@ a {
         gap: 15px;
     }
 
+    .menu-button {
+        display: inline-flex;
+    }
+
     .search-container {
         order: 3;
         min-width: 100%;
@@ -738,6 +764,21 @@ a {
     .user-profile span {
         display: none; /* Hide text on mobile to save space */
     }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(2px);
+    z-index: 90;
+    display: none;
+}
+.sidebar-overlay.active {
+    display: block;
 }
 .chat-scope {
     display: flex;
@@ -785,4 +826,29 @@ a {
 
 .history-item:hover {
     transform: translateY(-2px);
+}
+/* Scouting Header */
+.scout-header {
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.scout-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .scout-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .scout-header h1 {
+        font-size: 1.6rem;
+    }
 }

@@ -12,6 +12,10 @@ if (empty($scopes)) {
 $scopeLabel = implode(' + ', array_map(function($s){ return $s === 'national' ? 'Nacional (BR)' : 'Internacional'; }, $scopes));
 $typesParam = $_GET['types'] ?? '';
 $selectedTypes = array_filter(array_map('trim', explode(',', $typesParam)));
+$crop = trim($_GET['crop'] ?? '');
+$region = trim($_GET['region'] ?? '');
+$period = trim($_GET['period'] ?? '');
+$stage = trim($_GET['stage'] ?? '');
 
 function fetchTopResearchers($query) {
     if (!trim($query)) return null;
@@ -131,7 +135,8 @@ $analysisData = [
         'summary' => [
             ['label' => 'Demanda potencial', 'value' => 'Crescimento 12% a.a.; TAM BR ~R$1,2 bi'],
             ['label' => 'Diferenciação', 'value' => 'Biológicos + custo competitivo'],
-            ['label' => 'Barreiras de entrada', 'value' => 'Registro, distribuição, awareness']
+            ['label' => 'Barreiras de entrada', 'value' => 'Registro, distribuição, awareness'],
+            ['label' => 'Concorrentes', 'value' => 'Syngenta, Bayer, BASF, Corteva']
         ],
         'note' => 'Maior tração prevista em HF e soja, com expansão por canais regionais.' ,
         'sources' => [
@@ -254,7 +259,7 @@ if (empty($selectedTypes)) {
 <?php if (isset($_GET['embed']) && $_GET['embed'] === '1'): ?>
     <div style="margin-bottom: var(--spacing-xl); display: flex; justify-content: space-between; align-items: center;">
         <div>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px;">Relatório de Scouting • Escopo: <span style="color: var(--accent-color); font-weight: 600;"><?= $scopeLabel ?></span></p>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px;">Relatório de Scouting • Escopo: <span style="color: var(--accent-color); font-weight: 600;"><?= $scopeLabel ?></span><?php if ($crop || $region || $period || $stage): ?> • Filtros: <span style="font-weight: 600; color: var(--text-secondary);"><?php if ($crop): ?>Cultura: <?= htmlspecialchars(ucfirst($crop)) ?><?php endif; ?><?php if (($crop && ($region || $period || $stage))): ?>; <?php endif; ?><?php if ($region): ?>Região: <?= htmlspecialchars(ucwords(str_replace('-', ' ', $region))) ?><?php endif; ?><?php if (($region && ($period || $stage))): ?>; <?php endif; ?><?php if ($period): ?>Período: <?= htmlspecialchars(str_replace('-', ' ', ucfirst($period))) ?><?php endif; ?><?php if (($period && $stage)): ?>; <?php endif; ?><?php if ($stage): ?>Estágio: <?= htmlspecialchars(ucfirst($stage)) ?><?php endif; ?></span><?php endif; ?></p>
             <h2 style="font-size: 1.5rem;">Análise: "<?= htmlspecialchars($query) ?>"</h2>
             <?php if (!empty($selectedTypes)): ?>
                 <div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:8px;">
@@ -329,9 +334,9 @@ if (empty($selectedTypes)) {
             <?php include '../includes/header.php'; ?>
 
             <!-- Header with Search Context -->
-            <div style="margin-bottom: var(--spacing-xl); display: flex; justify-content: space-between; align-items: center;">
+            <div class="scout-header">
                 <div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px;">Relatório de Scouting • Escopo: <span style="color: var(--accent-color); font-weight: 600;"><?= $scopeLabel ?></span></p>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px;">Relatório de Scouting • Escopo: <span style="color: var(--accent-color); font-weight: 600;"><?= $scopeLabel ?></span><?php if ($crop || $region || $period || $stage): ?> • Filtros: <span style="font-weight: 600; color: var(--text-secondary);"><?php if ($crop): ?>Cultura: <?= htmlspecialchars(ucfirst($crop)) ?><?php endif; ?><?php if (($crop && ($region || $period || $stage))): ?>; <?php endif; ?><?php if ($region): ?>Região: <?= htmlspecialchars(ucwords(str_replace('-', ' ', $region))) ?><?php endif; ?><?php if (($region && ($period || $stage))): ?>; <?php endif; ?><?php if ($period): ?>Período: <?= htmlspecialchars(str_replace('-', ' ', ucfirst($period))) ?><?php endif; ?><?php if (($period && $stage)): ?>; <?php endif; ?><?php if ($stage): ?>Estágio: <?= htmlspecialchars(ucfirst($stage)) ?><?php endif; ?></span><?php endif; ?></p>
                     <h1 style="font-size: 2rem;">Análise: "<?= htmlspecialchars($query) ?>"</h1>
                     <?php if (!empty($selectedTypes)): ?>
                         <div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:8px;">
@@ -341,7 +346,7 @@ if (empty($selectedTypes)) {
                         </div>
                     <?php endif; ?>
                 </div>
-                <div style="display: flex; gap: 10px;">
+                <div class="scout-actions">
                     <button class="btn-outline" onclick="window.print()"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
                     <button class="btn"><i class="fas a-share-alt"></i> Compartilhar</button>
                 </div>

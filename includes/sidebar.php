@@ -19,7 +19,7 @@
                 <i class="fas fa-clock-rotate-left"></i> Histórico
             </a>
         </li>
-        <li class="has-submenu">
+        <li class="has-submenu <?= in_array(basename($_SERVER['PHP_SELF']), ['research.php','data.php','patents.php','safety.php','ai-tools.php']) ? 'open' : '' ?>">
             <a href="#" id="settingsMenu" class="menu-toggle">
                 <i class="fas fa-cog"></i> Configurações
                 <i class="fas fa-chevron-down submenu-caret" style="margin-left:auto;"></i>
@@ -33,7 +33,7 @@
                 </li>
                 <li>
                     <a href="data.php" class="<?= basename($_SERVER['PHP_SELF']) == 'data.php' ? 'active' : '' ?>">
-                        <i class="fas fa-chart-line"></i> Dados Agronômicos
+                        <i class="fas fa-chart-line"></i> Dados e Integrações
                     </a>
                 </li>
                 <li>

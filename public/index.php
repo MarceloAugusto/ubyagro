@@ -22,7 +22,7 @@ require_once '../config/db.php';
 
             <!-- Search Engine Interface -->
             <div style="max-width: 800px; margin: 0 auto; padding-top: 0px; text-align: center;">
-                <h1 style="font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 80px;">
+                <h1 style="font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 800; line-height: 1.1; margin-bottom: 40px;">
                     <span style="color: var(--text-primary);">Explore novas oportunidades</span><br>
                     <span style="color: var(--primary-color);">com dados precisos</span>
                 </h1>
@@ -42,7 +42,7 @@ require_once '../config/db.php';
 
                     <div style="position: relative;">
                         <i id="searchIcon" class="fas fa-search" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); font-size: 1.2rem;"></i>
-                        <input type="text" name="q" id="searchInput" placeholder="Pesquise por moléculas, ingredientes ativos, concorrentes..." 
+                        <input type="text" name="q" id="searchInput" placeholder="Ex: Bioestimulantes de microalgas na cultura da soja" 
                                style="width: 100%; padding: 20px 140px 20px 55px; border-radius: 30px; border: 1px solid var(--glass-border); background: var(--surface-light); color: var(--text-primary); font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); outline: none; transition: all 0.3s;">
                         <button type="submit" class="search-action" style="position: absolute; right: 6px; top: 6px; height: 48px; padding: 0 24px; border-radius: 24px; border: none; background: linear-gradient(180deg, var(--primary-color), var(--secondary-color)); color: #fff; font-weight: 600; box-shadow: var(--shadow-sm);">Analisar</button>
                     </div>
@@ -57,6 +57,13 @@ require_once '../config/db.php';
                             <span><i class="fas fa-globe"></i> Internacional</span>
                         </label>
                         <input type="hidden" name="scopes" id="selectedScopes" value="national">
+                        <button type="button" id="openFilters" class="pill-toggle sm" style="margin-left:8px; background: transparent; border: none; padding: 0;">
+                            <i class="fas fa-sliders"></i> Filtros
+                        </button>
+                        <input type="hidden" name="crop" id="selectedCrop" value="">
+                        <input type="hidden" name="region" id="selectedRegion" value="">
+                        <input type="hidden" name="period" id="selectedPeriod" value="">
+                        <input type="hidden" name="stage" id="selectedStage" value="">
                     </div>
                     
                     <div style="margin-top: 50px; text-align: left;">
@@ -84,6 +91,69 @@ require_once '../config/db.php';
                     </div>
                 </form>
 
+                <div id="filtersModal" class="modal-overlay">
+                    <div class="modal-content glass-panel">
+                        <div class="modal-header">
+                            <h3><i class="fas fa-sliders"></i> Filtros adicionais</h3>
+                            <button class="close-modal" id="closeFilters">&times;</button>
+                        </div>
+                        <div class="chat-body" style="gap:20px;">
+                            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:16px; width:100%;">
+                                <div>
+                                    <span style="display:block; margin-bottom:6px; color: var(--text-secondary); font-weight:500;">Cultura</span>
+                                    <select id="filterCrop" style="width:100%; padding:10px 12px; border:1px solid var(--glass-border); border-radius:10px; background:white;">
+                                        <option value="">Todas</option>
+                                        <option value="soja">Soja</option>
+                                        <option value="milho">Milho</option>
+                                        <option value="hf">Hortifruti</option>
+                                        <option value="cana">Cana-de-açúcar</option>
+                                        <option value="cafe">Café</option>
+                                        <option value="trigo">Trigo</option>
+                                        <option value="algodao">Algodão</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <span style="display:block; margin-bottom:6px; color: var(--text-secondary); font-weight:500;">Região</span>
+                                    <select id="filterRegion" style="width:100%; padding:10px 12px; border:1px solid var(--glass-border); border-radius:10px; background:white;">
+                                        <option value="">Todas</option>
+                                        <option value="sul">Sul</option>
+                                        <option value="sudeste">Sudeste</option>
+                                        <option value="centro-oeste">Centro-Oeste</option>
+                                        <option value="norte">Norte</option>
+                                        <option value="nordeste">Nordeste</option>
+                                        <option value="america-latina">América Latina</option>
+                                        <option value="america-do-norte">América do Norte</option>
+                                        <option value="europa">Europa</option>
+                                        <option value="asia">Ásia</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <span style="display:block; margin-bottom:6px; color: var(--text-secondary); font-weight:500;">Período de análise</span>
+                                    <select id="filterPeriod" style="width:100%; padding:10px 12px; border:1px solid var(--glass-border); border-radius:10px; background:white;">
+                                        <option value="">Sem recorte</option>
+                                        <option value="2-anos">Últimos 2 anos</option>
+                                        <option value="5-anos">Últimos 5 anos</option>
+                                        <option value="10-anos">Últimos 10 anos</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <span style="display:block; margin-bottom:6px; color: var(--text-secondary); font-weight:500;">Estágio de desenvolvimento</span>
+                                    <select id="filterStage" style="width:100%; padding:10px 12px; border:1px solid var(--glass-border); border-radius:10px; background:white;">
+                                        <option value="">Todos</option>
+                                        <option value="pesquisa">Pesquisa</option>
+                                        <option value="piloto">Piloto</option>
+                                        <option value="comercial">Comercial</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-footer" style="justify-content:flex-end;">
+                            <a href="#" id="clearFilters" style="color: var(--text-secondary); margin-right:auto;">Limpar</a>
+                            <button class="btn" id="applyFilters"><i class="fas fa-check"></i> Aplicar filtros</button>
+                        </div>
+                    </div>
+                </div>
+
                 <script>
                     function updateSearchMode(mode) {
                         const input = document.getElementById('searchInput');
@@ -93,7 +163,7 @@ require_once '../config/db.php';
                             input.placeholder = "Pergunte algo para o assistente IA...";
                             icon.className = "fas fa-robot";
                         } else {
-                            input.placeholder = "Pesquise por moléculas, ingredientes ativos, concorrentes...";
+                            input.placeholder = "Ex: Bioestimulantes de microalgas na cultura da soja";
                             icon.className = "fas fa-search";
                     }
                     }
@@ -103,6 +173,10 @@ require_once '../config/db.php';
                         const query = document.getElementById('searchInput').value.trim();
                         const scopes = document.getElementById('selectedScopes').value;
                         const types = document.getElementById('selectedTypes').value;
+                        const crop = document.getElementById('selectedCrop').value;
+                        const region = document.getElementById('selectedRegion').value;
+                        const period = document.getElementById('selectedPeriod').value;
+                        const stage = document.getElementById('selectedStage').value;
 
                         if (mode === 'chat') {
                             e.preventDefault();
@@ -150,7 +224,7 @@ require_once '../config/db.php';
                                 arr.push({ q: query, scopes: scopes.split(',').map(function(s){return s.trim();}), date: new Date().toISOString(), mode: 'report' });
                                 localStorage.setItem('search_history', JSON.stringify(arr.slice(-50)));
                             } catch(e){}
-                            const params = new URLSearchParams({ embed: '1', q: query, scopes: scopes, types: types });
+                            const params = new URLSearchParams({ embed: '1', q: query, scopes: scopes, types: types, crop: crop, region: region, period: period, stage: stage });
                             fetch('scout.php?' + params.toString())
                                 .then(function(r){ return r.text(); })
                                 .then(function(html){
@@ -207,6 +281,43 @@ require_once '../config/db.php';
                         e.preventDefault();
                         chips.querySelectorAll('.chip').forEach(function(c){c.classList.remove('selected')});
                         updateTypes();
+                    });
+
+                    const openFiltersBtn = document.getElementById('openFilters');
+                    const filtersModal = document.getElementById('filtersModal');
+                    const closeFiltersBtn = document.getElementById('closeFilters');
+                    const applyFiltersBtn = document.getElementById('applyFilters');
+                    const clearFiltersBtn = document.getElementById('clearFilters');
+
+                    function closeFilters(){ filtersModal.classList.remove('active'); }
+                    if (openFiltersBtn) openFiltersBtn.addEventListener('click', function(){ filtersModal.classList.add('active'); });
+                    if (closeFiltersBtn) closeFiltersBtn.addEventListener('click', closeFilters);
+                    if (filtersModal) filtersModal.addEventListener('click', function(e){ if (e.target === filtersModal) closeFilters(); });
+                    if (applyFiltersBtn) applyFiltersBtn.addEventListener('click', function(){
+                        const cropSel = document.getElementById('filterCrop');
+                        const regionSel = document.getElementById('filterRegion');
+                        const periodSel = document.getElementById('filterPeriod');
+                        const stageSel = document.getElementById('filterStage');
+                        document.getElementById('selectedCrop').value = cropSel ? cropSel.value : '';
+                        document.getElementById('selectedRegion').value = regionSel ? regionSel.value : '';
+                        document.getElementById('selectedPeriod').value = periodSel ? periodSel.value : '';
+                        document.getElementById('selectedStage').value = stageSel ? stageSel.value : '';
+                        closeFilters();
+                    });
+                    if (clearFiltersBtn) clearFiltersBtn.addEventListener('click', function(e){
+                        e.preventDefault();
+                        const cropSel = document.getElementById('filterCrop');
+                        const regionSel = document.getElementById('filterRegion');
+                        const periodSel = document.getElementById('filterPeriod');
+                        const stageSel = document.getElementById('filterStage');
+                        if (cropSel) cropSel.value = '';
+                        if (regionSel) regionSel.value = '';
+                        if (periodSel) periodSel.value = '';
+                        if (stageSel) stageSel.value = '';
+                        document.getElementById('selectedCrop').value = '';
+                        document.getElementById('selectedRegion').value = '';
+                        document.getElementById('selectedPeriod').value = '';
+                        document.getElementById('selectedStage').value = '';
                     });
                 </script>
 

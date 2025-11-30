@@ -29,7 +29,7 @@ require_once '../config/db.php';
                 </div>
 
                 <!-- First Row: News and Trends -->
-                <div class="dashboard-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 30px;">
+                <div class="dashboard-grid grid-2" style="margin-bottom: 30px;">
                     <!-- Recent News Card -->
                     <div class="card glass-panel">
                         <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -142,7 +142,7 @@ require_once '../config/db.php';
                 </div>
 
                 <!-- Data Visualizations (from Data page) -->
-                <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 30px;">
+                <div class="dashboard-grid grid-2" style="margin-bottom: 30px;">
                     <div class="card glass-panel">
                         <h3>Padrões de Uso de Produtos</h3>
                         <div style="height: 250px; width: 100%;">
@@ -328,6 +328,39 @@ require_once '../config/db.php';
             color: var(--text-secondary);
             font-size: 1rem;
             margin: 0;
+        }
+        @media (max-width: 768px) {
+            
+            .news-list {
+                gap: 10px;
+            }
+            .news-item {
+                padding: 10px;
+                gap: 10px;
+                flex-direction: row;
+                align-items: center;
+            }
+            .news-image {
+                width: 80px;
+                height: 56px;
+                border-radius: 8px;
+            }
+            .news-content h4 {
+                font-size: 0.95rem;
+                margin: 0;
+            }
+            .news-content p {
+                display: none;
+            }
+            .news-time {
+                font-size: 0.7rem;
+            }
+            .page-header h1 {
+                font-size: 1.6rem;
+            }
+            #map {
+                height: 340px;
+            }
         }
     </style>
 
