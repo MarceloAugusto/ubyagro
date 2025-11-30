@@ -138,7 +138,7 @@ $analysisData = [
         ]
     ],
     'parcerias' => [
-        'title' => 'Possíveis Parcerias',
+        'title' => 'Parceirias',
         'icon' => 'fas fa-handshake',
         'color' => '#70a1ff', // Light Blue
         'content' => 'Mapeamento de parceiros estratégicos para aceleração do go-to-market.',
@@ -150,6 +150,34 @@ $analysisData = [
         ],
         'sources' => [
             ['name' => 'Radar de Inovação', 'url' => '#']
+        ]
+    ],
+    'estrategia' => [
+        'title' => 'Estratégia',
+        'icon' => 'fas fa-compass',
+        'color' => '#e3002a',
+        'content' => 'Diretrizes de posicionamento competitivo, segmentação de mercado e priorização de portfólio.',
+        'details' => [
+            'Posicionamento' => 'Foco em diferenciação técnica com narrativa de sustentabilidade.',
+            'Segmentos' => 'HF e soja como âncoras, com pilotos em milho.',
+            'Canais' => 'Parcerias com cooperativas regionais e distribuidores chave.'
+        ],
+        'sources' => [
+            ['name' => 'Plano Estratégico UbyAgro', 'url' => '#']
+        ]
+    ],
+    'impactos-agronomicos' => [
+        'title' => 'Impactos Agronômicos',
+        'icon' => 'fas fa-seedling',
+        'color' => '#2ecc71',
+        'content' => 'Efeitos esperados em produtividade, qualidade e resiliência das culturas.',
+        'details' => [
+            'Produtividade' => 'Ganhos médios em ensaios controlados superiores a 8–12%.',
+            'Resiliência' => 'Mitigação de estresse hídrico e fortalecimento radicular.',
+            'Solo' => 'Melhora de indicadores de saúde do solo em áreas tratadas.'
+        ],
+        'sources' => [
+            ['name' => 'Boletins Técnicos Embrapa', 'url' => '#']
         ]
     ],
     'fornecedores' => [
@@ -206,6 +234,9 @@ if (!$currentData) {
                 <div style="position: absolute; top: -20px; right: -20px; font-size: 10rem; opacity: 0.05; color: <?= $currentData['color'] ?>;">
                     <i class="<?= $currentData['icon'] ?>"></i>
                 </div>
+                <a href="#" class="btn" style="position: absolute; top: 16px; right: 16px; z-index: 2;">
+                    <i class="fas fa-download"></i> Baixar Relatório
+                </a>
                 
                 <div style="display: flex; align-items: center; gap: 20px; position: relative; z-index: 1;">
                     <div style="width: 60px; height: 60px; border-radius: 12px; background: <?= $currentData['color'] ?>20; display: flex; align-items: center; justify-content: center;">
@@ -277,9 +308,24 @@ if (!$currentData) {
                     </div>
                     
                     <!-- Action Buttons -->
-                    <button class="btn" style="width: 100%; justify-content: center;">
-                        <i class="fas fa-download"></i> Baixar Relatório Completo
-                    </button>
+                    
+                </div>
+            </div>
+
+            <div class="card glass-panel" style="margin-top: var(--spacing-xl); border-left: 4px solid <?= $currentData['color'] ?>;">
+                <h3 style="display:flex; align-items:center; gap:10px;">
+                    <i class="fas fa-clipboard"></i> Resumo
+                </h3>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <p style="line-height:1.7; color: var(--text-primary);">
+                        Esta análise de <strong><?= htmlspecialchars($currentData['title']) ?></strong> para "<?= htmlspecialchars($query) ?>" consolida evidências regulatórias, científicas e de mercado para apoiar a tomada de decisão. Em síntese: <?= htmlspecialchars($currentData['content']) ?>. O escopo e as fontes selecionadas fornecem contexto suficiente para estimar riscos e oportunidades no curto e médio prazo.
+                    </p>
+                    <p style="line-height:1.7; color: var(--text-primary);">
+                        Com base nos pontos chave apresentados, recomenda-se avançar com validações direcionadas e alinhadas ao portfólio atual, priorizando regiões de maior tração e parcerias institucionais. O conjunto de fontes consultadas (<?= count($currentData['sources']) ?> principais) sustenta a consistência dos resultados e indica caminhos de diferenciação.
+                    </p>
+                    <p style="line-height:1.7; color: var(--text-primary);">
+                        Próximos passos incluem aprofundar <em>due diligence</em> técnica e regulatória, consolidar métricas de desempenho em campo e estruturar o posicionamento competitivo para o mercado-alvo, considerando cronograma e recursos necessários.
+                    </p>
                 </div>
             </div>
 

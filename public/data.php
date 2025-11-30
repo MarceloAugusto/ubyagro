@@ -21,8 +21,8 @@ require_once '../config/db.php';
             <?php include '../includes/header.php'; ?>
 
             <!-- Platforms Integration -->
-            <div class="dashboard-grid" style="margin-bottom: var(--spacing-xl);">
-                <div class="card glass-panel">
+            <div class="inline-card-grid" style="margin-bottom: var(--spacing-xl);">
+                <div class="card glass-panel compact">
                     <div style="display: flex; justify-content: space-between; align-items: start;">
                         <div>
                             <h3><i class="fas fa-leaf"></i> Agrofit</h3>
@@ -31,7 +31,7 @@ require_once '../config/db.php';
                         <a href="https://agrofit.agricultura.gov.br/agrofit_cons/principal_agrofit_cons" target="_blank" class="btn">Acessar</a>
                     </div>
                 </div>
-                <div class="card glass-panel">
+                <div class="card glass-panel compact">
                     <div style="display: flex; justify-content: space-between; align-items: start;">
                         <div>
                             <h3><i class="fas fa-database"></i> AGROAPI</h3>
@@ -40,7 +40,7 @@ require_once '../config/db.php';
                         <a href="https://www.embrapa.br/agroapi" target="_blank" class="btn">Acessar</a>
                     </div>
                 </div>
-                <div class="card glass-panel">
+                <div class="card glass-panel compact">
                     <div style="display: flex; justify-content: space-between; align-items: start;">
                         <div>
                             <h3><i class="fas fa-tractor"></i> CONAB</h3>

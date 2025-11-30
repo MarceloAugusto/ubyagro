@@ -153,4 +153,45 @@ O texto gerado deve cobrir explicitamente:
 > documentos anexados ou nas APIs, declare 'Dados insuficientes'.
 >
 > 3\. Respeite a confidencialidade: não exponha dados marcados como
-> 'Confidencial P&D' em resumos gerais se o contexto não permitir."
+> 'Confidencial P&D' em resumos gerais se o contexto não permitir".
+
+---
+
+**Atualização de PRD — Estado atual do MVP (funcionamento real)**
+
+1. Páginas e Navegação
+- `Visão estratégica`: página com mapa (Leaflet + OpenStreetMap) e controle de camadas simuladas (`Uso de solo`, `Produtores registrados`, `Zona de influência`, `Centros`).
+- `Histórico`: exibe pesquisas anteriores a partir de `localStorage.search_history`; cada item leva para `scout.php` com os parâmetros da busca.
+- `Explorar (Scouting)`: pesquisa, seleção de escopo (Nacional/Internacional) e tipos; os resultados aparecem numa seção transparente e larga abaixo do formulário.
+- `Configurações` (submenu): `Inteligência & RAG`, `Pesquisa & Artigos`, `Dados Agronômicos`, `Patentes`, `Segurança (FISPQ)`.
+
+2. Pesquisa e Resultados
+- Escopo em chips (multi-seleção serializada em CSV): `Nacional`, `Internacional`.
+- Tipos disponíveis nos resultados: `Regulatório`, `Patentes`, `Técnico científico`, `Mercado`, `ESG`, `Riscos`, `Potencial Econômico`, `Parceirias`, `Estratégia`, `Impactos Agronômicos`, `Fornecedores`.
+- Envio em modo relatório executa `fetch` para `scout.php?embed=1` e injeta HTML na seção `#search-results`.
+- Cada acordeão mostra um resumo em lista simples com pares `tópico: valor` e uma nota breve (quando houver), seguido de fontes. Ex.: `Patentes encontradas: 14`, `Empresas registradoras: 5` — Nota: "A maioria dos depósitos se concentra nos clusters Sul/Sudeste...".
+- Botão "Ver detalhes" abre a página específica por tipo com conteúdo completo.
+
+3. Histórico
+- As buscas são registradas localmente com `{ q, scopes[], date, mode }` (limite de 50 entradas) e renderizadas em `history.php`.
+
+4. Estado de Integrações
+- IA/RAG e APIs externas ainda não estão integradas; páginas como `patents.php` usam dados mock.
+- RBAC não implementado no MVP; todas as páginas são acessíveis.
+
+5. UI/UX atual
+- Header sem título e sem barra de pesquisa global.
+- Título hero da página `Explorar` atualizado (duas linhas com destaque).
+- Seção de resultados com fundo transparente e largura maior.
+- Cards compactos em linha nas páginas `Pesquisa & Artigos` e `Dados Agronômicos`.
+
+6. Próximos passos (roadmap)
+- Implementar RBAC.
+- Integrar IA/RAG e fontes externas (MAPA, INPI/WIPO, SciELO, etc.).
+- Persistir histórico em banco e adicionar filtros.
+- Exportar relatório em PDF corporativo.
+- Tornar contadores dinâmicos por escopo/consulta.
+
+7. Critérios de Avaliação (mantidos no resultado)
+- ESG, Mercado, Impactos Agronômicos, Riscos, Cronograma e Recursos, Potencial Econômico, Técnico científico, Estratégia, Parceirias, Fornecedores, Patentes.
+- Cada pilar deve trazer resumos quantitativos/qualitativos e fontes.

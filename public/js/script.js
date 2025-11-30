@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adding a simple toggle functionality if we add a button later.
 
     const navLinks = document.querySelectorAll('.nav-links a');
+    const settingsToggle = document.getElementById('settingsMenu');
+    const settingsItem = settingsToggle ? settingsToggle.parentElement : null;
 
     navLinks.forEach(link => {
         link.addEventListener('click', function () {
@@ -11,6 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
             this.classList.add('active');
         });
     });
+
+    if (settingsToggle && settingsItem) {
+        settingsToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            settingsItem.classList.toggle('open');
+        });
+        const activeSubItem = settingsItem.querySelector('.submenu a.active');
+        if (activeSubItem) {
+            settingsItem.classList.add('open');
+        }
+    }
 
     // (removido bloco inválido de mock visual)
 });

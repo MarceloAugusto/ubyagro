@@ -62,8 +62,8 @@ try {
 
             <!-- Platforms Section -->
             <h2 style="margin-bottom: var(--spacing-md); font-size: 1.5rem;">Plataformas de Pesquisa</h2>
-            <div class="dashboard-grid" style="margin-bottom: var(--spacing-xl);">
-                <a href="https://scholar.google.com.br/" target="_blank" class="card glass-panel" style="text-decoration: none;">
+            <div class="inline-card-grid" style="margin-bottom: var(--spacing-xl);">
+                <a href="https://scholar.google.com.br/" target="blank" class="card glass-panel compact" style="text-decoration: none;">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <i class="fas fa-graduation-cap" style="font-size: 2rem; color: #4285F4;"></i>
                         <div>
@@ -72,7 +72,7 @@ try {
                         </div>
                     </div>
                 </a>
-                <a href="https://scielo.org/" target="_blank" class="card glass-panel" style="text-decoration: none;">
+                <a href="https://scielo.org/" target="blank" class="card glass-panel compact" style="text-decoration: none;">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <i class="fas fa-book" style="font-size: 2rem; color: #F48F42;"></i>
                         <div>
@@ -81,7 +81,7 @@ try {
                         </div>
                     </div>
                 </a>
-                <a href="https://www.redape.org/" target="_blank" class="card glass-panel" style="text-decoration: none;">
+                <a href="https://www.redape.org/" target="blank" class="card glass-panel compact" style="text-decoration: none;">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <i class="fas fa-seedling" style="font-size: 2rem; color: var(--primary-color);"></i>
                         <div>
@@ -98,7 +98,7 @@ try {
             </div>
 
             <!-- Articles Feed -->
-            <h2 style="margin-bottom: var(--spacing-md); font-size: 1.5rem;">Artigos Recentes & Estudos</h2>
+            <h2 style="margin-bottom: var(--spacing-md); font-size: 1.5rem;">Artigos e Estudos adicionados</h2>
             <div class="glass-panel" style="padding: var(--spacing-lg);">
                 <?php if (count($links) > 0): ?>
                     <ul style="display: flex; flex-direction: column; gap: 15px;">
